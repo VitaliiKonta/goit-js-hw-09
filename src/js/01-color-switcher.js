@@ -10,14 +10,14 @@ function getRandomHexColor() {
 }
 
 function startChangingColor() {
-  startButton.disabled = true; // вимикаємо кнопку Start
+  startButton.disabled = true;
   bgcColorId = setInterval(() => {
     document.body.style.backgroundColor = getRandomHexColor();
   }, 1000);
 }
 
 function stopChangingColor() {
-  startButton.disabled = false; // включаємо кнопку Start
+  startButton.disabled = false;
   clearInterval(bgcColorId);
 }
 
