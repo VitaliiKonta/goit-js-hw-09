@@ -77,8 +77,8 @@ flatpickr(dateTimePicker, {
     } else {
       Notiflix.Report.success(
         'Let`s start',
-        'You selected date is in the future. Click `Start` to continue',
-        'Start'
+        'Finally, selected date is in the future. Click `Start` on a counter to begin',
+        'But now press me)'
       );
       strBtn.disabled = false;
     }
