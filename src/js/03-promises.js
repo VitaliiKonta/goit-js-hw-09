@@ -4,8 +4,8 @@ const form = document.querySelector('.form');
 form.addEventListener('click', onPromiseCreate);
 
 function createPromise(position, delay) {
+  const shouldResolve = Math.random() > 0.3;
   return new Promise((resolve, reject) => {
-    const shouldResolve = Math.random() > 0.3;
     setTimeout(() => {
       if (shouldResolve) {
         resolve({ position, delay });
@@ -23,20 +23,25 @@ function onPromiseCreate(e) {
   let inputStep = Number(step.value);
   let inputAmount = Number(amount.value);
 
-  for (let i = 1; i <= inputAmount; i += 1) {
-    inputDelay += inputStep;
-
-    createPromise(i, inputDelay)
-      .then(({ position, delay }) => {
-        Notiflix.Notify.success(
-          `✅ Fulfilled promise ${position} in ${delay}ms`
-        );
-      })
-      .catch(({ position, delay }) => {
-        Notiflix.Notify.failure(
-          `❌ Rejected promise ${position} in ${delay}ms`
-        );
-      });
-    e.currentTarget.reset();
+  if (inputAmount < 0) {
+    return Notiflix.Notify.warning(
+      `❗ Amount cannot be less than or equal to zero! Try`
+    );
+  } else {
+    for (let i = 1; i <= inputAmount; i += 1) {
+      createPromise(i, inputDelay)
+        .then(({ position, delay }) => {
+          Notiflix.Notify.success(
+            `✅ Fulfilled promise ${position} in ${delay}ms`
+          );
+        })
+        .catch(({ position, delay }) => {
+          Notiflix.Notify.failure(
+            `❌ Rejected promise ${position} in ${delay}ms`
+          );
+        });
+      inputDelay += inputStep;
+      e.currentTarget.reset();
+    }
   }
 }
