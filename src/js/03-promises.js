@@ -24,6 +24,7 @@ function onPromiseCreate(e) {
   let inputAmount = Number(amount.value);
 
   if (inputAmount < 0) {
+    // inputAmount <= 0 || inputAmount === 0; так виводиться навіть коли нічого не введено(((((((((((((
     return Notiflix.Notify.warning(
       `❗ Amount cannot be less than or equal to zero! Try`
     );
